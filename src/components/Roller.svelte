@@ -1,17 +1,23 @@
 <script lang="ts">
-  import {roll} from '../stores.js'
+  import { roll } from "../stores.js";
+  import type { RollInput } from "../types.js";
+  import { rollDice } from "../util.js";
 
-  export let count: number = 1, sides: number = 20, modifier: number = 0;
+  export let input: RollInput = {
+    count: 1,
+    sides: 20,
+    modifier: 0,
+  };
 
-  function rollDice(){
-    let rolls: Array<number> = []
-    for (let i = 0; i < count; i++){
-      rolls.push(Math.floor(Math.random() * sides) + 1)
-    }
-    const total: number = rolls.reduce((total, current) => total + current) + modifier;
+  let { count, sides, modifier } = input;
 
-    roll.set(`Rolled ${count}d${sides}+${modifier}: ${total} [ ${rolls.join(' ')} ]`)
+  function onRoll() {
+    let output = rollDice(input);
+
+    roll.set(output);
   }
 </script>
 
-<button on:click={rollDice}>Roll {count}d{sides}+{modifier}</button>
+<button on:click={onRoll}>
+  Roll {input.count}d{input.sides}+{input.modifier}
+</button>
