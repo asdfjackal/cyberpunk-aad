@@ -19,5 +19,11 @@
 </script>
 
 <button on:click={onRoll}>
-  Roll {input.count}d{input.sides}+{input.modifier}
+  {#if input.modifier === 0}
+    Roll {input.count}d{input.sides}
+  {:else if modifier < 0}
+    Roll {input.count}d{input.sides}{input.modifier}
+  {:else}
+    Roll {input.count}d{input.sides}+{input.modifier}
+  {/if}
 </button>

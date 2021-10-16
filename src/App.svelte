@@ -1,5 +1,7 @@
 <script lang="ts">
+  import CleanLocal from "./components/CleanLocal.svelte";
   import Roller from "./components/Roller.svelte";
+  import RollForm from "./components/RollForm.svelte";
   import Tracker from "./components/Tracker.svelte";
 </script>
 
@@ -12,5 +14,7 @@
       modifier: 1,
     }}
   />
+  <CleanLocal />
   <Tracker />
+  <RollForm />
 </main>

@@ -13,3 +13,16 @@ export function rollDice(input: RollInput): RollOutput {
       total
     }
 }
+
+export function stringToRollInput(input: String): RollInput | null {
+  const regex = /^(\d+)d(\d+)([\+-]\d+)?$/
+  const found = input.match(regex)
+  if (found === null) return null
+  console.log(found)
+  const output = {
+    count: parseInt(found[1]),
+    sides: parseInt(found[2]),
+    modifier: found[3] === undefined ? 0 : parseInt(found[3])
+  }
+  return output
+}
