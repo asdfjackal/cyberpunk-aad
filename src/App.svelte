@@ -1,20 +1,14 @@
 <script lang="ts">
-  import CleanLocal from "./components/CleanLocal.svelte";
-  import Roller from "./components/Roller.svelte";
-  import RollForm from "./components/RollForm.svelte";
-  import Tracker from "./components/Tracker.svelte";
+  import { Router, Route } from "svelte-routing";
+  import DmApp from "./pages/DMApp.svelte";
+  import PlayerApp from "./pages/PlayerApp.svelte";
+
+  export let url = "";
 </script>
 
-<main>
-  <Roller />
-  <Roller
-    input={{
-      count: 5,
-      sides: 6,
-      modifier: 1,
-    }}
-  />
-  <CleanLocal />
-  <Tracker />
-  <RollForm />
-</main>
+<Router {url}>
+  <main>
+    <Route path="/" component={DmApp} />
+    <Route path="room/:id" component={PlayerApp} />
+  </main>
+</Router>
