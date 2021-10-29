@@ -1,33 +1,20 @@
 <script lang="ts">
-  import { roll } from "../stores";
   import type { RollOutput } from "../types";
   import RollOutputDisplay from "./RollOutputDisplay.svelte";
 
-  let lastRoll: RollOutput = null;
-
-  let rollHistory: Array<RollOutput> = [];
-
-  roll.subscribe((newRoll) => {
-    if (lastRoll !== null) {
-      rollHistory.unshift(lastRoll);
-      if (rollHistory.length > 5) {
-        rollHistory.pop();
-      }
-      rollHistory = rollHistory;
-    }
-    lastRoll = newRoll;
-  });
+  export let rollHistory: RollOutput[];
 </script>
 
 <h3>
-  {#if lastRoll !== null}
-    <RollOutputDisplay output={lastRoll} />
+  {#if rollHistory.length >= 1}
+    <RollOutputDisplay output={rollHistory[0]} />
   {:else}
     Nothing Rolled Yet
   {/if}
 </h3>
+
 <ul>
-  {#each rollHistory as pastRoll (pastRoll)}
+  {#each rollHistory.slice(1) as pastRoll (pastRoll)}
     <li>
       <RollOutputDisplay output={pastRoll} />
     </li>
