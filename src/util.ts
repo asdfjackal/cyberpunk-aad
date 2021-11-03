@@ -14,7 +14,7 @@ export function rollDice(input: RollInput): RollOutput {
     }
 }
 
-export function stringToRollInput(input: String): RollInput | null {
+export function stringToRollInput(input: string): RollInput | null {
   const regex = /^(\d+)d(\d+)([\+-]\d+)?$/
   const found = input.match(regex)
   if (found === null) return null

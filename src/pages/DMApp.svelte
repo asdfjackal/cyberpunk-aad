@@ -9,6 +9,7 @@
   import Tracker from "../components/Tracker.svelte";
   import { roll } from "../stores";
   import type { RollOutput } from "../types";
+  import MookList from "../components/MookList.svelte";
 
   const roomCode = uuid4();
   const peer = new Peer(roomCode, { debug: 2 });
@@ -85,4 +86,5 @@
   <Tracker {rollHistory} />
   <p>{peers} Peers Connected</p>
   <a href="localhost:5000/room/{roomCode}">{roomCode}</a>
+  <MookList />
 </main>

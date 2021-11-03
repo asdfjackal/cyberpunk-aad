@@ -1,4 +1,6 @@
 import { Writable, writable } from 'svelte/store';
-import type { RollOutput } from './types';
+import type { Mook, RollOutput } from './types';
 
 export const roll : Writable<RollOutput> = writable(null)
+
+export const mookList: Writable<Map<string, Mook>> = writable(new Map()) 
