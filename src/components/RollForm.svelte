@@ -1,12 +1,22 @@
 <script lang="ts">
-  import { stringToRollInput } from "../util";
-  import Roller from "./Roller.svelte";
+  import type { RollInput } from "../types";
 
-  let input = "";
-  $: output = stringToRollInput(input);
+  import { rollInputToString, stringToRollInput } from "../util";
+
+  export let rollInput: RollInput;
+  let input = rollInputToString(rollInput);
+  $: valid = stringToRollInput(input) !== null;
+  $: {
+    if (valid) {
+      rollInput = stringToRollInput(input)!;
+    }
+  }
 </script>
 
-<input bind:value={input} />
-{#if output !== null}
-  <Roller input={output} />
-{/if}
+<input class={valid ? "valid" : "invalid"} bind:value={input} />
+
+<style>
+  input.invalid {
+    border-color: #f44336;
+  }
+</style>

@@ -38,8 +38,8 @@ export type Gun = Weapon & {
   magazine: number
   rof: number
   hands: number
-  concelable: boolean
-  modesAndFeatures: Array<string>
+  concealable: boolean
+  modesAndFeatures: string
 }
 
 export type Armor = {
@@ -51,9 +51,10 @@ export type Mook = {
   name: string
   skills: Array<Skill>
   stats: Stats
+  hitpoints: number
   guns: Array<Gun>
   weapons: Array<Weapon>
-  headArmor: Armor
-  bodyArmor: Armor
+  headArmor: Armor | null
+  bodyArmor: Armor | null
   equipment: Array<string>
 }

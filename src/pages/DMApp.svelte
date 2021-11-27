@@ -3,13 +3,10 @@
 
   import { v4 as uuid4 } from "uuid";
   import { onMount } from "svelte";
-  import CleanLocal from "../components/CleanLocal.svelte";
-  import Roller from "../components/Roller.svelte";
-  import RollForm from "../components/RollForm.svelte";
-  import Tracker from "../components/Tracker.svelte";
   import { roll } from "../stores";
   import type { RollOutput } from "../types";
-  import MookList from "../components/MookList.svelte";
+  import MookEditor from "../components/MookEditor.svelte";
+  import { hardenedBodyguard } from "../data/mooks";
 
   const roomCode = uuid4();
   const peer = new Peer(roomCode, { debug: 2 });
@@ -74,7 +71,7 @@
 </script>
 
 <main>
-  <Roller />
+  <!-- <Roller />
   <Roller
     input={{
       count: 5,
@@ -85,6 +82,6 @@
   <CleanLocal />
   <Tracker {rollHistory} />
   <p>{peers} Peers Connected</p>
-  <a href="localhost:5000/room/{roomCode}">{roomCode}</a>
-  <MookList />
+  <a href="localhost:5000/room/{roomCode}">{roomCode}</a> -->
+  <MookEditor baseMook={hardenedBodyguard} />
 </main>

@@ -26,3 +26,10 @@ export function stringToRollInput(input: string): RollInput | null {
   }
   return output
 }
+
+export function rollInputToString(input: RollInput): string {
+  let modifier = '';
+  if(input.modifier < 0) modifier = input.modifier.toString()
+  if(input.modifier > 0) modifier = '+' + input.modifier.toString()
+  return `${input.count}d${input.sides}${modifier}`
+}

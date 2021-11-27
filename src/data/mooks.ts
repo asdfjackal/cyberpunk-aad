@@ -35,6 +35,7 @@ const hardenedBodyguard: Mook = {
     body: 7,
     emp: 3
   },
+  hitpoints: 30,
   guns: [
     {
       name: 'Poor Quality Shotgun',
@@ -47,10 +48,8 @@ const hardenedBodyguard: Mook = {
       magazine: 4,
       rof: 1,
       hands: 2,
-      concelable: false,
-      modesAndFeatures: [
-        'Shotgun Shell'
-      ]
+      concealable: false,
+      modesAndFeatures: 'Shotgun Shell'
     }
   ],
   weapons: [
@@ -78,4 +77,27 @@ const hardenedBodyguard: Mook = {
   ]
 }
 
-export { hardenedBodyguard };
+const emptyMook: Mook = {
+  name: '',
+  skills: [],
+  stats: {
+    int: 0,
+    ref: 0,
+    dex: 0,
+    tech: 0,
+    cool: 0,
+    will: 0,
+    luck: null,
+    move: 0,
+    body: 0,
+    emp: 0
+  },
+  hitpoints: 0,
+  guns: [],
+  weapons: [],
+  headArmor: null,
+  bodyArmor: null,
+  equipment: []
+}
+
+export { hardenedBodyguard, emptyMook };
