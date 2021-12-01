@@ -17,6 +17,6 @@
 
 <style>
   input.invalid {
-    border-color: #f44336;
+    border-color: #ff3333;
   }
 </style>

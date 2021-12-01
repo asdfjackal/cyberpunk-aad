@@ -27,5 +27,4 @@
   });
 </script>
 
-<RollForm />
 <Tracker {rollHistory} />
