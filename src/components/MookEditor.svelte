@@ -99,6 +99,16 @@
       </tr>
     {/each}
   </table>
+  <p>Head Armor</p>
+  <div class="stat-row">
+    <input type="text" bind:value={mook.headArmor.name} />
+    <input type="number" bind:value={mook.headArmor.sp} />
+  </div>
+  <p>Body Armor</p>
+  <div class="stat-row">
+    <input type="text" bind:value={mook.bodyArmor.name} />
+    <input type="number" bind:value={mook.bodyArmor.sp} />
+  </div>
 </div>
 
 <style>
