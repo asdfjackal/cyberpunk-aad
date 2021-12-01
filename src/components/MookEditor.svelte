@@ -1,13 +1,68 @@
 <script lang="ts">
-  import { cloneDeep } from "lodash";
-  import type { Mook } from "../types";
-  import RollForm from "./RollForm.svelte";
+  import { cloneDeep } from 'lodash';
+  import { mount_component } from 'svelte/internal';
+  import type { Mook } from '../types';
+  import RollForm from './RollForm.svelte';
   export let baseMook: Mook;
 
   let mook: Mook = cloneDeep(baseMook);
 
   $: mook.hitpoints =
     10 + 5 * Math.ceil((mook.stats.body + mook.stats.will) / 2);
+
+  function addGun() {
+    mook.guns = [
+      ...mook.guns,
+      {
+        name: '',
+        damage: {
+          count: 1,
+          sides: 6,
+          modifier: 0,
+        },
+        skill: '',
+        magazine: 0,
+        rof: 0,
+        hands: 1,
+        concealable: false,
+        modesAndFeatures: '',
+      },
+    ];
+  }
+
+  function deleteGun(index: number) {
+    mook.guns.splice(index, 1);
+    mook.guns = mook.guns;
+  }
+
+  function addWeapon() {
+    mook.weapons = [
+      ...mook.weapons,
+      {
+        name: '',
+        damage: {
+          count: 1,
+          sides: 6,
+          modifier: 0,
+        },
+        skill: '',
+      },
+    ];
+  }
+
+  function deleteWeapon(index: number) {
+    mook.weapons.splice(index, 1);
+    mook.weapons = mook.weapons;
+  }
+
+  function addEquipment() {
+    mook.equipment = [...mook.equipment, ''];
+  }
+
+  function deleteEquipment(index: number) {
+    mook.equipment.splice(index, 1);
+    mook.equipment = mook.equipment;
+  }
 </script>
 
 <div class="mook-editor-container">
@@ -16,7 +71,7 @@
       class="mook-name"
       type="text"
       placeholder="Mook Name"
-      bind:value={mook["name"]}
+      bind:value={mook['name']}
     />
   </div>
   <div class="stat-row">
@@ -31,7 +86,7 @@
     {#each Object.keys(mook.stats).slice(5) as key}
       <div class="stat">
         <label for="key">{key.toUpperCase()}</label>
-        {#if key === "luck"}
+        {#if key === 'luck'}
           <input name="key" type="number" disabled />
         {:else}
           <input name="key" type="number" bind:value={mook.stats[key]} />
@@ -69,8 +124,9 @@
       <th>Hands</th>
       <th>Concealable</th>
       <th>Modes and Features</th>
+      <th />
     </tr>
-    {#each mook.guns as gun}
+    {#each mook.guns as gun, i}
       <tr>
         <td><input type="text" bind:value={gun.name} /></td>
         <td><RollForm bind:rollInput={gun.damage} /></td>
@@ -80,9 +136,11 @@
         <td><input type="number" bind:value={gun.hands} /></td>
         <td><input type="checkbox" bind:checked={gun.concealable} /></td>
         <td><input type="text" bind:value={gun.modesAndFeatures} /></td>
+        <td><button on:click={() => deleteGun(i)}>Delete</button></td>
       </tr>
     {/each}
   </table>
+  <button on:click={addGun}>Add Gun</button>
 
   <p>Weapons</p>
   <table>
@@ -90,15 +148,33 @@
       <th>Name</th>
       <th>Damage</th>
       <th>Skill</th>
+      <th />
     </tr>
-    {#each mook.weapons as weapon}
+    {#each mook.weapons as weapon, i}
       <tr>
         <td><input type="text" bind:value={weapon.name} /></td>
         <td><RollForm bind:rollInput={weapon.damage} /></td>
         <td><input type="text" bind:value={weapon.skill} /></td>
+        <td><button on:click={() => deleteWeapon(i)}>Delete</button></td>
       </tr>
     {/each}
   </table>
+  <button on:click={addWeapon}>Add Weapon</button>
+
+  <p>Equipment</p>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th />
+    </tr>
+    {#each mook.equipment as item, i}
+      <tr>
+        <td><input type="text" bind:value={item} /></td>
+        <td><button on:click={() => deleteEquipment(i)}>Delete</button></td>
+      </tr>
+    {/each}
+  </table>
+  <button on:click={addEquipment}>Add Equipment</button>
 </div>
 
 <style>
@@ -145,7 +221,7 @@
     text-align: center;
   }
 
-  td > input[type="number"] {
+  td > input[type='number'] {
     width: 75px;
   }
 
