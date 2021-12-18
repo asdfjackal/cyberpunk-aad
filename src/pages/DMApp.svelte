@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Peer, { DataConnection } from "peerjs";
+  import Peer, { DataConnection } from 'peerjs';
 
-  import { v4 as uuid4 } from "uuid";
-  import { onMount } from "svelte";
-  import { roll } from "../stores";
-  import type { RollOutput } from "../types";
-  import MookEditor from "../components/MookEditor.svelte";
-  import { hardenedBodyguard } from "../data/mooks";
+  import { v4 as uuid4 } from 'uuid';
+  import { onMount } from 'svelte';
+  import { roll } from '../stores';
+  import type { RollOutput } from '../types';
+  import MookEditor from '../components/MookEditor.svelte';
+  import { hardenedBodyguard } from '../data/mooks';
 
   const roomCode = uuid4();
   const peer = new Peer(roomCode, { debug: 2 });
@@ -17,10 +17,10 @@
   let peers = 0;
   $: peers = conns.length;
 
-  peer.on("connection", (c: DataConnection) => {
-    c.on("open", () => {
-      c.on("data", (data) => {
-        if (data.message === "roll") {
+  peer.on('connection', (c: DataConnection) => {
+    c.on('open', () => {
+      c.on('data', (data) => {
+        if (data.message === 'roll') {
           roll.set(data.value);
         }
       });
@@ -64,7 +64,7 @@
   $: {
     console.log(rollHistory);
     pushData({
-      message: "history",
+      message: 'history',
       value: rollHistory,
     });
   }

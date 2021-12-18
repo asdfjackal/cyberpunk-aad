@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { Router, Route } from "svelte-routing";
-  import DmApp from "./pages/DMApp.svelte";
-  import PlayerApp from "./pages/PlayerApp.svelte";
+  import { Router, Route } from 'svelte-routing';
+  import DmApp from './pages/DMApp.svelte';
+  import PlayerApp from './pages/PlayerApp.svelte';
 
-  export let url = "";
+  export let url = '';
 </script>
 
 <Router {url}>
